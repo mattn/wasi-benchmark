@@ -1,9 +1,13 @@
+NUMBER=40
+
+.PHONY: bench clean
+
 all : bench
 
 bench: go.wasm zig.wasm rust.wasm
-	time -p wasmtime go.wasm
-	time -p wasmtime zig.wasm
-	time -p wasmtime rust.wasm
+	time -p wasmtime go.wasm ${NUMBER}
+	time -p wasmtime zig.wasm ${NUMBER}
+	time -p wasmtime rust.wasm ${NUMBER}
 
 go.wasm: main.go
 	GOOS=wasip1 GOARCH=wasm go build -o go.wasm main.go

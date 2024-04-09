@@ -6,5 +6,10 @@ fn fib(n: u64) u64 {
 }
 
 pub fn main() anyerror!void {
-    std.debug.print("{}\n", .{fib(40)});
+    const allocator = std.heap.page_allocator;
+    var args = try std.process.argsWithAllocator(allocator);
+    _ = args.skip();
+    var str_num = args.next().?;
+    var num = try std.fmt.parseInt(u64, str_num, 10);
+    std.debug.print("{}\n", .{fib(num)});
 }
