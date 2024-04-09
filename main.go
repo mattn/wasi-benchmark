@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func fib(num uint64) uint64 {
+func fib(num uint32) uint32 {
 	if num <= 1 {
 		return num
 	}
@@ -13,9 +13,9 @@ func fib(num uint64) uint64 {
 }
 
 func main() {
-	num, err := strconv.ParseUint(os.Args[1], 10, 64)
+	num, err := strconv.ParseUint(os.Args[1], 10, 32)
 	if err != nil {
 		panic(err)
 	}
-	println(fib(num))
+	println(fib(uint32(num)))
 }

@@ -1,6 +1,6 @@
 const std = @import("std");
 
-fn fib(n: u64) u64 {
+fn fib(n: u32) u32 {
     if (n == 0 or n == 1) return n;
     return fib(n - 1) + fib(n - 2);
 }
@@ -10,6 +10,6 @@ pub fn main() anyerror!void {
     var args = try std.process.argsWithAllocator(allocator);
     _ = args.skip();
     var str_num = args.next().?;
-    var num = try std.fmt.parseInt(u64, str_num, 10);
+    var num = try std.fmt.parseInt(u32, str_num, 10);
     std.debug.print("{}\n", .{fib(num)});
 }
