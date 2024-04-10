@@ -9,7 +9,7 @@ pub fn main() anyerror!void {
     const allocator = std.heap.page_allocator;
     var args = try std.process.argsWithAllocator(allocator);
     _ = args.skip();
-    var str_num = args.next().?;
-    var num = try std.fmt.parseInt(u32, str_num, 10);
+    const str_num = args.next().?;
+    const num = try std.fmt.parseInt(u32, str_num, 10);
     std.debug.print("{}\n", .{fib(num)});
 }

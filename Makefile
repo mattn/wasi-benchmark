@@ -13,7 +13,7 @@ go.wasm: main.go
 	GOOS=wasip1 GOARCH=wasm go build -o $@ $<
 
 zig.wasm: main.zig
-	zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
+	zig build-exe -target wasm32-wasi-musl -O ReleaseSmall $< -femit-bin=$@
 
 rust.wasm: main.rs
 	rustc $< -O --target wasm32-wasi -o $@
@@ -21,12 +21,13 @@ rust.wasm: main.rs
 d.wasm: main.d
 	ldc2 \
 		--mtriple=wasm32-unknown-wasi \
-		-O \
+		-Oz \
 		--betterC \
 		-L$(WASI_SDK)/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
 		-L--gc-sections \
+		-L--strip-all \
 		-of=$@ \
 		$<
 
