@@ -23,9 +23,10 @@ d.wasm: main.d
 		--mtriple=wasm32-unknown-wasi \
 		-O \
 		--betterC \
+		-L$(HOME)/wasi-sdk-21.0/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
 		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
-		-L-gc-sections \
+		-L--gc-sections \
 		-of=d.wasm \
 		main.d
 
