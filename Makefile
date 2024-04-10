@@ -1,13 +1,16 @@
 NUMBER=40
 
+WASI_SDK=$(HOME)/wasi-sdk-21.0
+
 .PHONY: bench clean
 
 all : bench
 
-bench: go.wasm zig.wasm rust.wasm
+bench: go.wasm zig.wasm rust.wasm d.wasm
 	time -p wasmtime go.wasm ${NUMBER}
 	time -p wasmtime zig.wasm ${NUMBER}
 	time -p wasmtime rust.wasm ${NUMBER}
+	time -p wasmtime d.wasm ${NUMBER}
 
 go.wasm: main.go
 	GOOS=wasip1 GOARCH=wasm go build -o go.wasm main.go
@@ -23,9 +26,9 @@ d.wasm: main.d
 		--mtriple=wasm32-unknown-wasi \
 		-O \
 		--betterC \
-		-L$(HOME)/wasi-sdk-21.0/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
-		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
-		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
+		-L$(WASI_SDK)/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
+		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
+		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
 		-L--gc-sections \
 		-of=d.wasm \
 		main.d
