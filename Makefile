@@ -2,21 +2,21 @@ NUMBER=40
 
 WASI_SDK=$(HOME)/wasi-sdk-21.0
 
-.PHONY: bench clean
+.PHONY: benchmark clean
 
-all : bench
+all : benchmark
 
-bench: go.wasm zig.wasm rust.wasm d.wasm
+benchmark: go.wasm zig.wasm rust.wasm d.wasm
 	./build.sh | tee README.md
 
 go.wasm: main.go
-	GOOS=wasip1 GOARCH=wasm go build -o go.wasm main.go
+	GOOS=wasip1 GOARCH=wasm go build -o $@ $<
 
 zig.wasm: main.zig
-	zig build-exe -target wasm32-wasi-musl -O ReleaseFast main.zig -femit-bin=zig.wasm
+	zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
 
 rust.wasm: main.rs
-	rustc main.rs -O --target wasm32-wasi -o rust.wasm
+	rustc $< -O --target wasm32-wasi -o $@
 
 d.wasm: main.d
 	ldc2 \
@@ -27,8 +27,8 @@ d.wasm: main.d
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
 		-L--gc-sections \
-		-of=d.wasm \
-		main.d
+		-of=$@ \
+		$<
 
 clean:
 	-rm *.o *.wasm
