@@ -7,10 +7,16 @@ WASI_SDK=$(HOME)/wasi-sdk-21.0
 all : bench
 
 bench: go.wasm zig.wasm rust.wasm d.wasm
-	time -p wasmtime go.wasm ${NUMBER}
-	time -p wasmtime zig.wasm ${NUMBER}
-	time -p wasmtime rust.wasm ${NUMBER}
-	time -p wasmtime d.wasm ${NUMBER}
+	(echo '# wasi-benchmark' && \
+	echo '```' && \
+	ls -la *.wasm && \
+	echo '```' && \
+	echo '```' && \
+	time -p wasmtime go.wasm ${NUMBER} 2>&1 && \
+	time -p wasmtime zig.wasm ${NUMBER} 2>&1 && \
+	time -p wasmtime rust.wasm ${NUMBER} 2>&1 && \
+	time -p wasmtime d.wasm ${NUMBER} 2>&1 && \
+	echo '```') 2>&1 > README.md
 
 go.wasm: main.go
 	GOOS=wasip1 GOARCH=wasm go build -o go.wasm main.go
