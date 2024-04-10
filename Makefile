@@ -18,5 +18,17 @@ zig.wasm: main.zig
 rust.wasm: main.rs
 	rustc main.rs -O --target wasm32-wasi -o rust.wasm
 
+d.wasm: main.d
+	ldc2 \
+		--mtriple=wasm32-unknown-wasi \
+		-O \
+		--betterC \
+		-L$(HOME)/wasi-sdk-21.0/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
+		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
+		-L$(HOME)/wasi-sdk-21.0/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
+		-L--gc-sections \
+		-of=d.wasm \
+		main.d
+
 clean:
 	-rm *.o *.wasm
