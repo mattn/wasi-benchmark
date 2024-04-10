@@ -12,9 +12,13 @@ bench: go.wasm zig.wasm rust.wasm d.wasm
 	ls -la *.wasm && \
 	echo '```' && \
 	echo '```' && \
+	echo '# go.wasm' && \
 	time -p wasmtime go.wasm ${NUMBER} 2>&1 && \
+	echo '# zig.wasm' && \
 	time -p wasmtime zig.wasm ${NUMBER} 2>&1 && \
+	echo '# rust.wasm' && \
 	time -p wasmtime rust.wasm ${NUMBER} 2>&1 && \
+	echo '# d.wasm' && \
 	time -p wasmtime d.wasm ${NUMBER} 2>&1 && \
 	echo '```') 2>&1 > README.md
 
