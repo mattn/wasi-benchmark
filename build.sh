@@ -4,11 +4,26 @@ set -e
 
 NUMBER=${1:-40}
 
-echo "# wasi-benchmark"
-echo "|Name|Size|Time|"
-echo "|-|-:|-|"
+cat <<EOF
+# wasi-benchmark
+
+Benchmark of WASI in several languages.
+
+## RESULT
+
+|Name|Size|Time|
+|-|-:|-|
+EOF
+
 /bin/ls *.wasm | /usr/bin/sort | while read NAME; do
   SIZE=$(stat --printf="%s" $NAME)
   OUTPUT=$(/usr/bin/time --format=%e sh -c "wasmtime $NAME $NUMBER > /dev/null 2>&1" 2>&1)
   echo "|$NAME|$SIZE|$OUTPUT|"
 done
+
+cat <<EOF
+
+## LICENSE
+
+Yasuhiro Matsumoto (a.k.a. mattn)
+EOF
