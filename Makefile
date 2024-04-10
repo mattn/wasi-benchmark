@@ -16,7 +16,7 @@ zig.wasm: main.zig
 	zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
 
 rust.wasm: main.rs
-	rustc $< -O --target wasm32-wasi -o $@
+	rustc $< -O -C strip=symbols --target wasm32-wasi -o $@
 
 d.wasm: main.d
 	ldc2 \
