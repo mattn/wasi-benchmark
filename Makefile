@@ -16,7 +16,7 @@ go-version:
 	-@go version
 
 zig.wasm: main.zig
-	zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
+	zig build-exe -target wasm32-wasi-musl -O ReleaseSmall $< -femit-bin=$@
 
 zig-version:
 	-@echo -n 'zig ' && zig version
@@ -30,12 +30,13 @@ rust-version:
 d.wasm: main.d
 	ldc2 \
 		--mtriple=wasm32-unknown-wasi \
-		-O \
+		-Oz \
 		--betterC \
 		-L$(WASI_SDK)/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
 		-L--gc-sections \
+		-L--strip-all \
 		-of=$@ \
 		$<
 
