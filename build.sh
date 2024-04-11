@@ -15,12 +15,12 @@ Benchmark of WASI in several languages. This benchmark uses fibonacci number ${N
 |-|-|-:|-|
 EOF
 
-/bin/ls *.wasm | /usr/bin/sort | while read NAME; do
-  WASM=$(basename $NAME .wasm)
-  VERSION=$(make -s $WASM-version 2> /dev/null)
-  SIZE=$(stat --printf="%s" $NAME)
-  OUTPUT=$(/usr/bin/time --format=%e sh -c "wasmtime $NAME $NUMBER > /dev/null 2>&1" 2>&1)
-  echo "|$NAME|$VERSION|$SIZE|$OUTPUT|"
+/bin/ls *.wasm | /usr/bin/sort | while read WASM; do
+  NAME=$(basename $WASM .wasm)
+  VERSION=$(make -s $NAME-version 2> /dev/null)
+  SIZE=$(stat --printf="%s" $WASM)
+  OUTPUT=$(/usr/bin/time --format=%e sh -c "wasmtime $WASM $NUMBER > /dev/null 2>&1" 2>&1)
+  echo "|$WASM|$VERSION|$SIZE|$OUTPUT|"
 done
 
 cat <<EOF
