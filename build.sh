@@ -9,7 +9,7 @@ cat <<EOF
 
 Benchmark of WASI in several languages. This benchmark uses fibonacci number ${NUMBER}.
 
-## RESULT
+## Result
 
 |Name|Version|Size|Time|
 |-|-|-:|-|
@@ -25,7 +25,7 @@ done
 
 cat <<EOF
 
-## LICENSE
+## License
 
 MIT
 
