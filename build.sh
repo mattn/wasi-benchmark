@@ -7,7 +7,7 @@ NUMBER=${1:-40}
 cat <<EOF
 # wasi-benchmark
 
-Benchmark of WASI in several languages.
+Benchmark of WASI in several languages. This benchmark uses fibonacci number ${NUMBER}.
 
 ## RESULT
 
