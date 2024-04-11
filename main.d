@@ -4,7 +4,7 @@ nothrow:
 
 enum EX_SOFTWARE = 70;
 
-__gshared int errno;
+extern int errno;
 void _Exit(int status) @trusted;
 void perror(const char* s) @trusted;
 pragma(printf) int printf(const(char)* format, ...) @trusted;
