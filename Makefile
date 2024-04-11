@@ -22,7 +22,7 @@ zig-version:
 	-@echo -n 'zig ' && zig version
 
 rust.wasm: main.rs
-	rustc $< -O --target wasm32-wasi -o $@
+	rustc $< -O -C strip=symbols --target wasm32-wasi -o $@
 
 rust-version:
 	-@rustc -V
