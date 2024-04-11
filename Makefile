@@ -10,7 +10,7 @@ benchmark: go.wasm zig.wasm rust.wasm d.wasm c.wasm
 	./build.sh ${NUMBER} | tee README.md
 
 go.wasm: main.go
-	GOOS=wasip1 GOARCH=wasm go build -o $@ $<
+	GOOS=wasip1 GOARCH=wasm go build -ldflags="-s -w" -o $@ $<
 
 go-version:
 	-@go version
