@@ -53,7 +53,7 @@ c.wasm: main.c
 	@$(WASI_SDK)/bin/clang -O3 -o $@ $<
 
 c-version:
-	-@clang --version | grep 'clang version'
+	-@$(WASI_SDK)/bin/clang --version | grep 'clang version'
 
 clean:
 	-rm *.o *.wasm
