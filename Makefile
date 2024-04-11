@@ -1,12 +1,12 @@
 NUMBER=40
 
-WASI_SDK=$(HOME)/wasi-sdk-21.0
+WASI_SDK?=$(HOME)/wasi-sdk-21.0
 
 .PHONY: benchmark clean
 
 all : benchmark
 
-benchmark: go.wasm zig.wasm rust.wasm d.wasm
+benchmark: go.wasm zig.wasm rust.wasm d.wasm c.wasm
 	./build.sh | tee README.md
 
 go.wasm: main.go
@@ -29,6 +29,9 @@ d.wasm: main.d
 		-L--gc-sections \
 		-of=$@ \
 		$<
+
+c.wasm: main.c
+	$(WASI_SDK)/bin/clang -O3 -o $@ $<
 
 clean:
 	-rm *.o *.wasm

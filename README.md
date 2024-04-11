@@ -6,10 +6,11 @@ Benchmark of WASI in several languages.
 
 |Name|Size|Time|
 |-|-:|-|
-|d.wasm|32914|0.55|
-|go.wasm|1669940|1.92|
-|rust.wasm|1715396|0.49|
-|zig.wasm|573071|0.60|
+|c.wasm|23495|0.96|
+|d.wasm|32914|0.49|
+|go.wasm|1669940|1.91|
+|rust.wasm|1715396|0.45|
+|zig.wasm|573071|0.52|
 
 ## LICENSE
 
