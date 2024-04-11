@@ -2,11 +2,11 @@ NUMBER=42
 
 WASI_SDK?=$(HOME)/wasi-sdk-21.0
 
-.PHONY: benchmark clean c-version go-version tinygo-version d-version rust-version zig-version
+.PHONY: benchmark clean c-version go-version tinygo-version d-version rust-version zig-fast-version zig-small-version
 
 all : benchmark
 
-benchmark: go.wasm zig.wasm zig-fast.wasm rust.wasm d.wasm c.wasm tinygo.wasm
+benchmark: go.wasm zig-small.wasm zig-fast.wasm rust.wasm d.wasm c.wasm tinygo.wasm
 	@./build.sh ${NUMBER} | tee README.md
 
 go.wasm: main.go
@@ -27,10 +27,10 @@ zig-fast.wasm: main.zig
 zig-fast-version:
 	-@echo -n 'zig ' && zig version
 
-zig.wasm: main.zig
+zig-small.wasm: main.zig
 	@zig build-exe -target wasm32-wasi-musl -O ReleaseSmall $< -femit-bin=$@
 
-zig-version:
+zig-small-version:
 	-@echo -n 'zig ' && zig version
 
 rust.wasm: main.rs
