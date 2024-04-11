@@ -19,7 +19,7 @@ zig.wasm: main.zig
 	zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
 
 zig-version:
-	-@zig version
+	-@echo -n 'zig ' && zig version
 
 rust.wasm: main.rs
 	rustc $< -O --target wasm32-wasi -o $@
@@ -46,7 +46,7 @@ c.wasm: main.c
 	$(WASI_SDK)/bin/clang -O3 -o $@ $<
 
 c-version:
-	-@clang -dumpversion
+	-@clang --version | grep 'clang version'
 
 clean:
 	-rm *.o *.wasm
