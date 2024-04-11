@@ -27,5 +27,9 @@ cat <<EOF
 
 ## LICENSE
 
+MIT
+
+## Author
+
 Yasuhiro Matsumoto (a.k.a. mattn)
 EOF
