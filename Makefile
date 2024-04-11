@@ -38,6 +38,7 @@ d.wasm: main.d
 		--mtriple=wasm32-unknown-wasi \
 		-Oz \
 		--betterC \
+		--fvisibility=hidden \
 		-L$(WASI_SDK)/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
