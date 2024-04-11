@@ -19,7 +19,7 @@ tinygo.wasm: main.go
 	@tinygo build -target=wasi -no-debug -o $@ $<
 
 tinygo-version:
-	-@tinygo version
+	-@tinygo version | sed 's/ (.*//'
 
 zig-fast.wasm: main.zig
 	@zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
