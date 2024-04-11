@@ -1,4 +1,4 @@
-NUMBER=41
+NUMBER=42
 
 WASI_SDK?=$(HOME)/wasi-sdk-21.0
 
@@ -7,7 +7,7 @@ WASI_SDK?=$(HOME)/wasi-sdk-21.0
 all : benchmark
 
 benchmark: go.wasm zig.wasm rust.wasm d.wasm c.wasm
-	./build.sh | tee README.md
+	./build.sh ${NUMBER} | tee README.md
 
 go.wasm: main.go
 	GOOS=wasip1 GOARCH=wasm go build -o $@ $<
