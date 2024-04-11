@@ -6,7 +6,7 @@ WASI_SDK?=$(HOME)/wasi-sdk-21.0
 
 all : benchmark
 
-benchmark: go.wasm zig.wasm rust.wasm d.wasm c.wasm tinygo.wasm
+benchmark: go.wasm zig.wasm zig-fast.wasm rust.wasm d.wasm c.wasm tinygo.wasm
 	@./build.sh ${NUMBER} | tee README.md
 
 go.wasm: main.go
@@ -20,6 +20,12 @@ tinygo.wasm: main.go
 
 tinygo-version:
 	-@tinygo version
+
+zig-fast.wasm: main.zig
+	@zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
+
+zig-fast-version:
+	-@echo -n 'zig ' && zig version
 
 zig.wasm: main.zig
 	@zig build-exe -target wasm32-wasi-musl -O ReleaseSmall $< -femit-bin=$@
