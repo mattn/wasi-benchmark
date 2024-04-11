@@ -11,14 +11,16 @@ Benchmark of WASI in several languages.
 
 ## RESULT
 
-|Name|Size|Time|
-|-|-:|-|
+|Name|Version|Size|Time|
+|-|-|-:|-|
 EOF
 
 /bin/ls *.wasm | /usr/bin/sort | while read NAME; do
+  WASM=$(basename $NAME .wasm)
+  VERSION=$(make -s $WASM-version 2> /dev/null)
   SIZE=$(stat --printf="%s" $NAME)
   OUTPUT=$(/usr/bin/time --format=%e sh -c "wasmtime $NAME $NUMBER > /dev/null 2>&1" 2>&1)
-  echo "|$NAME|$SIZE|$OUTPUT|"
+  echo "|$NAME|$VERSION|$SIZE|$OUTPUT|"
 done
 
 cat <<EOF
