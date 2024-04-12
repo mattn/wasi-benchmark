@@ -34,7 +34,7 @@ zig-small-version:
 	-@echo -n 'zig ' && zig version
 
 rust.wasm: main.rs
-	@rustc $< -O -C strip=symbols --target wasm32-wasi -o $@
+	@rustc $< -O -C lto=true -C codegen-units=1 -C strip=symbols --target wasm32-wasi -o $@
 
 rust-version:
 	-@rustc -V
