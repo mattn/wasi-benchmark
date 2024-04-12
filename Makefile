@@ -22,7 +22,7 @@ tinygo-version:
 	-@tinygo version | sed 's/ (.*//'
 
 zig-fast.wasm: main.zig
-	@zig build-exe -target wasm32-wasi-musl -O ReleaseFast $< -femit-bin=$@
+	@zig build-exe -target wasm32-wasi-musl -O ReleaseFast -fstrip $< -femit-bin=$@
 
 zig-fast-version:
 	-@echo -n 'zig ' && zig version
