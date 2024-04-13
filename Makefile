@@ -57,16 +57,20 @@ d-version:
 	-@ldc2 --version | head -n 1 | sed 's/://'
 
 c.wasm: main.c
-	@$(WASI_SDK)/bin/clang -Oz -s -o $@ $<
+	@#$(WASI_SDK)/bin/clang -Oz -s -o $@ $<
+	@zig cc -target wasm32-wasi-musl -Oz -s -o c.wasm main.c
 
 c-version:
-	-@$(WASI_SDK)/bin/clang --version | grep 'clang version'
+	-@#$(WASI_SDK)/bin/clang --version | grep 'clang version'
+	-@zig cc --version | grep 'clang version'
 
 cpp.wasm: main.cpp
-	@$(WASI_SDK)/bin/clang++ -std=c++23 -s -fno-exceptions -o $@ $<
+	@#$(WASI_SDK)/bin/clang++ -std=c++23 -s -fno-exceptions -o $@ $<
+	@zig c++ -target wasm32-wasi-musl -Oz -s -fno-exceptions -o cpp.wasm main.cpp
 
 cpp-version:
-	-@$(WASI_SDK)/bin/clang++ --version | grep 'clang version'
+	-@#$(WASI_SDK)/bin/clang++ --version | grep 'clang version'
+	-@zig c++ --version | grep 'clang version'
 
 clean:
 	-rm *.o *.wasm

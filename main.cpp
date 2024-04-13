@@ -1,4 +1,4 @@
-#include <print>
+#include <iostream>
 
 int
 fib(int n) {
@@ -9,15 +9,15 @@ fib(int n) {
 int
 main(int argc, char* argv[]) {
   if (argc != 2) {
-    std::println("Usage: {} <number>", argv[0]);
+    std::cerr << "Usage: " << argv[0] << " <number>" << std::endl;
     return 1;
   }
   int n = std::stoi(argv[1]);
   if (n < 0) {
-    std::println("Number should be non-negative.");
+    std::cerr << "Number should be non-negative." << std::endl;
     return 1;
   }
-  std::println("{}", fib(n));
+  std::cout << fib(n) << std::endl;
 
   return 0;
 }
