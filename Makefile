@@ -63,10 +63,10 @@ c-version:
 	-@$(WASI_SDK)/bin/clang --version | grep 'clang version'
 
 cpp.wasm: main.cpp
-	@$(WASI_SDK)/bin/clang++ -std=c++23 -s -fno-exceptions -Oz -o $@ $<
+	@$(WASI_SDK)/bin/clang++ -std=c++23 -s -fno-exceptions -o $@ $<
 
 cpp-version:
-	-@$(WASI_SDK)/bin/clang++ --version | grep 'clang++ version'
+	-@$(WASI_SDK)/bin/clang++ --version | grep 'clang version'
 
 clean:
 	-rm *.o *.wasm
