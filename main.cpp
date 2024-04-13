@@ -17,7 +17,7 @@ main(int argc, char* argv[]) {
         std::println("Number should be non-negative.");
         return 1;
     }
-    std::println("{}", fibonacci(n));
+    std::println("{}", fib(n));
 
     return 0;
 }
