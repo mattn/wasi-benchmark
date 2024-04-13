@@ -2,11 +2,11 @@ NUMBER=42
 
 WASI_SDK?=$(HOME)/wasi-sdk-21.0
 
-.PHONY: benchmark clean c-version go-version tinygo-version d-version rust-version zig-fast-version zig-small-version
+.PHONY: benchmark clean c-version cpp-version go-version tinygo-version d-version rust-version zig-fast-version zig-small-version
 
 all : benchmark
 
-benchmark: go.wasm zig-small.wasm zig-fast.wasm rust.wasm d.wasm c.wasm tinygo.wasm
+benchmark: go.wasm zig-small.wasm zig-fast.wasm rust.wasm d.wasm c.wasm tinygo.wasm cpp.wasm
 	@./build.sh ${NUMBER} | tee README.md
 
 go.wasm: main.go
@@ -57,10 +57,16 @@ d-version:
 	-@ldc2 --version | head -n 1 | sed 's/://'
 
 c.wasm: main.c
-	@$(WASI_SDK)/bin/clang -O3 -o $@ $<
+	@$(WASI_SDK)/bin/clang -Oz -s -o $@ $<
 
 c-version:
 	-@$(WASI_SDK)/bin/clang --version | grep 'clang version'
+
+cpp.wasm: main.cpp
+	@$(WASI_SDK)/bin/clang++ -std=c++23 -s -fno-exceptions -Oz -o $@ $<
+
+cpp-version:
+	-@$(WASI_SDK)/bin/clang++ --version | grep 'clang++ version'
 
 clean:
 	-rm *.o *.wasm
