@@ -8,16 +8,16 @@ fib(int n) {
 
 int
 main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::println("Usage: {} <number>", argv[0]);
-        return 1;
-    }
-    int n = std::stoi(argv[1]);
-    if (n < 0) {
-        std::println("Number should be non-negative.");
-        return 1;
-    }
-    std::println("{}", fib(n));
+  if (argc != 2) {
+    std::println("Usage: {} <number>", argv[0]);
+    return 1;
+  }
+  int n = std::stoi(argv[1]);
+  if (n < 0) {
+    std::println("Number should be non-negative.");
+    return 1;
+  }
+  std::println("{}", fib(n));
 
-    return 0;
+  return 0;
 }
