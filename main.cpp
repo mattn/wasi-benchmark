@@ -1,13 +1,9 @@
 #include <print>
-#include <vector>
 
-long long
-fibonacci(int n, std::vector<long long>& memo) {
-    if (n <= 1)
-        return n;
-    if (memo[n] != -1)
-        return memo[n];
-    return memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+int
+fib(int n) {
+  if (n <= 1) return n;
+  return fib(n - 1) + fib(n -2);
 }
 
 int
@@ -21,8 +17,7 @@ main(int argc, char* argv[]) {
         std::println("Number should be non-negative.");
         return 1;
     }
-    std::vector<long long> memo(n + 1, -1);
-    std::println("{}", fibonacci(n, memo));
+    std::println("{}", fibonacci(n));
 
     return 0;
 }
