@@ -57,13 +57,13 @@ d-version:
 	-@ldc2 --version | head -n 1 | sed 's/://'
 
 c.wasm: main.c
-	@$(WASI_SDK)/bin/clang -O2 -mbulk-memory -o $@ $<
+	@$(WASI_SDK)/bin/clang -O2 -mbulk-memory -s -o $@ $<
 
 c-version:
 	@$(WASI_SDK)/bin/clang --version | grep 'clang version'
 
 cpp.wasm: main.cpp
-	@$(WASI_SDK)/bin/clang++ -O2 -mbulk-memory -std=c++23 -fno-exceptions -o $@ $<
+	@$(WASI_SDK)/bin/clang++ -O2 -mbulk-memory -std=c++23 -s -fno-exceptions -o $@ $<
 
 cpp-version:
 	-@$(WASI_SDK)/bin/clang++ --version | grep 'clang version'
