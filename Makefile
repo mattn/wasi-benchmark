@@ -1,6 +1,6 @@
 NUMBER=42
 
-WASI_SDK?=$(HOME)/wasi-sdk-21.0
+WASI_SDK?=$(HOME)/wasi-sdk-22.0
 
 .PHONY: benchmark clean c-version cpp-version go-version tinygo-version d-version rust-version zig-fast-version zig-small-version
 
@@ -45,7 +45,7 @@ d.wasm: main.d
 		-Oz \
 		--betterC \
 		--fvisibility=hidden \
-		-L$(WASI_SDK)/lib/clang/17/lib/wasi/libclang_rt.builtins-wasm32.a \
+		-L$(WASI_SDK)/lib/clang/18/lib/wasi/libclang_rt.builtins-wasm32.a \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/crt1.o \
 		-L$(WASI_SDK)/share/wasi-sysroot/lib/wasm32-wasi/libc.a \
 		-L--gc-sections \
